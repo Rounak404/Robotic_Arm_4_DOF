@@ -360,6 +360,14 @@
     <mimic joint="joint_5" multiplier="-1" offset="0"/>
   </joint>
 
+  <link name="tcp_link"/>
+
+  <joint name="tcp_joint" type="fixed">
+    <parent link="link_4"/>
+    <child link="tcp_link"/>
+    <origin xyz="0 0 0.09" rpy="0 0 0"/>
+  </joint>
+
 
  <ros2_control name="MyRobotSystem" type="system">
   <hardware>
