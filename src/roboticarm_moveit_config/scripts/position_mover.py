@@ -95,7 +95,7 @@ class PositionMover(Node):
             return
 
         joints = np.clip(joints,
-            [0.0, -1.57, -1.57, -1.57],
+            [-3.14, -1.57, -1.57, -1.57],
             [3.14,  1.57,  1.57,  1.57])
 
         joint_names = ['joint_1', 'joint_2', 'joint_3', 'joint_4']
