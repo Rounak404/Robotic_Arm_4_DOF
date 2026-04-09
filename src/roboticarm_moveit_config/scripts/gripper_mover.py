@@ -71,10 +71,10 @@ class GripperMover(Node):
             f'({math.degrees(joint_position):.1f}°)')
 
         trajectory = JointTrajectory()
-        trajectory.joint_names = ['joint_5']
+        trajectory.joint_names = ['joint_5','joint_6']
         point = JointTrajectoryPoint()
-        point.positions = [joint_position]
-        point.velocities = [0.0]
+        point.positions = [joint_position, -joint_position]
+        point.velocities = [0.0, 0.0]
         point.time_from_start = Duration(sec=2, nanosec=0)
         trajectory.points.append(point)
 

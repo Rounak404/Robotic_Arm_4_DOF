@@ -16,7 +16,7 @@ from geometry_msgs.msg import Pose
 SCENE_FILE = '/tmp/moveit_scene.pkl'
 
 # ── Workspace constants (tune for your specific 4-DOF arm) ────────────────
-MIN_SAFE_Z        = 0.08   # arm cannot reliably reach below this height
+MIN_SAFE_Z        = 0.02   # arm cannot reliably reach below this height
 TRANSIT_Z         = 0.22   # cruise altitude between pick and place
 MIN_REACH_XY      = 0.08   # minimum XY distance from base (inner dead zone)
 MAX_REACH_XY      = 0.32   # maximum XY reach
@@ -271,9 +271,7 @@ class PickPlace:
         self.attach_object(object_name)
         self._spin(duration=2.0)   # longer spin for seed to stabilize
 
-        # 7. Lift to transit height
-        log.info('📌 Step 7 — Lift')
-        self._move(pick_x, pick_y, TRANSIT_Z, label='lift')
+
 
         # 8. Fly directly to place — NO midpoint transit
         log.info('📌 Step 8 — Approach place')
@@ -294,24 +292,6 @@ class PickPlace:
         self.detach_object(object_name)
         time.sleep(1.5)
 
-        # 12. Retreat FIRST — before adding box ← KEY CHANGE
-        # log.info('📌 Step 12 — Retreat up BEFORE adding box')
-        # self._move(place_x, place_y, place_z + 0.08, label='retreat-up')
-
-        
-
-        # 14. Park above pick — arm fully away from place
-        # log.info('📌 Step 14 — Park')
-        # self._move(pick_x, pick_y, TRANSIT_Z, label='park')
-
-        # 15. NOW add box — arm is safely away ← KEY CHANGE
-        # log.info('📌 Step 15 — Register box at place')
-        # self.remove_object(object_name)
-        # time.sleep(0.2)
-        # self.add_box(object_name,
-        #              place_x, place_y, place_z - 0.02,
-        #              box_size_x, box_size_y, box_size_z)
-        # self._spin(duration=0.5)
 
         # 13. Move to transit height
         log.info('📌 Step 13 — Transit height')

@@ -18,3 +18,4 @@ moveit_simple_controller_manager:
     type: FollowJointTrajectory
     joints:
       - joint_5
+      - joint_6

@@ -8,7 +8,23 @@
     <!-- Import control_xacro -->
     <xacro:include filename="roboticarm_desc.ros2_control.xacro" />
 
+    <gazebo>
+        <plugin filename="gz_ros2_control-system"
+                name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+            <parameters>$(find roboticarm_moveit_config)/config/ros2_controllers.yaml</parameters>
+        </plugin>
+        
+    </gazebo>
+    <gazebo>
+        <plugin filename="gz-sim-joint-mimic-system"
+                name="gz::sim::systems::JointMimic">
+            <joint>joint_5</joint>
+            <mimic_joint>joint_6</mimic_joint>
+            <multiplier>-1</multiplier>
+        </plugin>
+    </gazebo>
 
-    <xacro:roboticarm_desc_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
 
+    <!-- <xacro:roboticarm_desc_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/> -->
+    <xacro:roboticarm_desc_ros2_control name="GazeboSystem" initial_positions_file="$(arg initial_positions_file)"/>
 </robot>

@@ -51,7 +51,7 @@
         xyz="0.000831323898337343 0.00454672482986223 0.00190351834728859"
         rpy="0 0 0" />
       <mass
-        value="0.1066908638872" />
+        value="2.066908638872" />
       <inertia
         ixx="5.93109549248364E-05"
         ixy="-6.73127407715459E-06"
@@ -305,9 +305,7 @@
       </material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 -0.04" rpy="0 0 0"/>
       <geometry>
         <mesh
           filename="package://roboticarm_desc/meshes/link_5.STL" />
@@ -345,7 +343,7 @@
     </visual>
 
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 -0.04" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://roboticarm_desc/meshes/link_6.STL"/>
       </geometry>
@@ -357,7 +355,6 @@
     <child link="link_6"/>
     <axis xyz="0 1 0"/>
     <limit lower="-1.57" upper="1.57" effort="100" velocity="2"/>
-    <mimic joint="joint_5" multiplier="-1" offset="0"/>
   </joint>
 
   <link name="tcp_link"/>
@@ -369,9 +366,9 @@
   </joint>
 
 
- <ros2_control name="MyRobotSystem" type="system">
+  <ros2_control name="MyRobotSystem" type="system">
   <hardware>
-    <plugin>mock_components/GenericSystem</plugin>
+    <plugin>gz_ros2_control/GazeboSystem</plugin>
   </hardware>
 
   <joint name="joint_1">
@@ -399,10 +396,12 @@
     <state_interface name="position"/>
   </joint>
 
-  <!-- mimic joint -->
+  
   <joint name="joint_6">
     <state_interface name="position"/>
   </joint>
 
-  </ros2_control>
+  </ros2_control> 
+
+
 </robot>
